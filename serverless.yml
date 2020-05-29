@@ -1,0 +1,42 @@
+service: ec2noip
+
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 128
+  logRetentionInDays: 14
+  reservedConcurrency: 5
+
+  region: eu-west-1
+
+# you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ec2:DescribeInstances"
+        - "ec2:DescribeTags"
+      Resource: "*"
+
+
+functions:
+  start:
+    provisionedConcurrency: 1
+    reservedConcurrency: 2
+    handler: handler.start
+    events:
+#      - http:
+#          path: users
+#          method: get
+      - cloudwatchEvent:
+          event:
+            source:
+              - aws.ec2
+            detail-type:
+              - EC2 Instance State-change Notification
+            detail:
+              state:
+                - running
+
+plugins:
+  - serverless-python-requirements
+#  - serverless-plugin-log-retention
