@@ -2,13 +2,12 @@
   "name": "ec2noip",
   "description": "",
   "version": "0.1.0",
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
     "local": "sls invoke local --function start -p ec2-event.json"
   },
   "devDependencies": {
-    "serverless": "^1.71.3",
+    "serverless": "^1.80.0",
     "serverless-python-requirements": "^5.1.0"
   }
 }
