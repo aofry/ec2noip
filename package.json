@@ -7,7 +7,7 @@
     "local": "sls invoke local --function start -p ec2-event.json"
   },
   "devDependencies": {
-    "serverless": "^1.80.0",
-    "serverless-python-requirements": "^5.1.0"
+    "serverless": "2.19.0",
+    "serverless-python-requirements": "5.1.0"
   }
 }
