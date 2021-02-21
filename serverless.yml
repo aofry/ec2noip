@@ -1,13 +1,20 @@
 service: ec2noip
 
+package:
+  exclude:
+    - .serverless/**
+    - .git/**
+    - .gitignore
+    - venv
+    - node_modules/**
+
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.7
   memorySize: 128
-  logRetentionInDays: 14
-  reservedConcurrency: 5
+  logRetentionInDays: 3
 
-  region: eu-west-1
+  region: eu-central-1
 
 # you can add statements to the Lambda function's IAM Role here
   iamRoleStatements:
@@ -20,13 +27,9 @@ provider:
 
 functions:
   start:
-    provisionedConcurrency: 1
     reservedConcurrency: 2
     handler: handler.start
     events:
-#      - http:
-#          path: users
-#          method: get
       - cloudwatchEvent:
           event:
             source:
@@ -39,4 +42,3 @@ functions:
 
 plugins:
   - serverless-python-requirements
-#  - serverless-plugin-log-retention

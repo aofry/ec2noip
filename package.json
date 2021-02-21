@@ -4,10 +4,11 @@
   "version": "0.1.0",
   "dependencies": {},
   "scripts": {
-    "local": "sls invoke local --function start -p ec2-event.json"
+    "local": "sls invoke local --function start -p ec2-event.json",
+    "deploy": "serverless deploy"
   },
   "devDependencies": {
-    "serverless": "2.19.0",
+    "serverless": "2.25.2",
     "serverless-python-requirements": "5.1.0"
   }
 }
